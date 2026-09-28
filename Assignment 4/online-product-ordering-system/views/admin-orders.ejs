@@ -1,6 +1,0 @@
-<!DOCTYPE html>
-<html><head><title>Manage Orders</title><link rel="stylesheet" href="/style.css"></head>
-<body><nav><b>Admin - Online Product Store</b><span><a href="/products">Products</a> | <a href="/orders/admin">Orders</a> | <a href="/logout">Logout</a></span></nav>
-<div class="dashboard"><h1>Manage Orders</h1><div class="table-container"><table><tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th><th>Update</th></tr>
-<% orders.forEach(o => { %><tr><td><%= o._id %></td><td><%= o.customer.name %><br><%= o.customer.email %></td><td>₹<%= o.total.toFixed(2) %></td><td><%= o.status %></td><td><form action="/orders/admin/<%= o._id %>/status" method="POST"><select name="status"><% ["Placed","Processing","Shipped","Delivered","Cancelled"].forEach(s => { %><option <%= s===o.status?"selected":"" %>><%= s %></option><% }) %></select><button>Save</button></form></td></tr><% }) %>
-</table></div></div></body></html>
