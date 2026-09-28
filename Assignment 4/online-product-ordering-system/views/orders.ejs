@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html><head><title>My Orders</title><link rel="stylesheet" href="/style.css"></head>
+<body><nav><b>Online Product Store</b><span><a href="/products">Products</a> | <a href="/cart">Cart</a> | <a href="/logout">Logout</a></span></nav>
+<div class="dashboard"><h1>My Orders</h1>
+<% if(!orders.length){ %><div class="card"><p>No orders yet.</p></div><% } %>
+<% orders.forEach(o => { %><div class="order"><h3>Order #<%= o._id %></h3><p>Status: <b><%= o.status %></b></p><p>Date: <%= o.createdAt.toLocaleString() %></p><ul><% o.items.forEach(i => { %><li><%= i.name %> × <%= i.quantity %> — ₹<%= (i.price*i.quantity).toFixed(2) %></li><% }) %></ul><h3>Total: ₹<%= o.total.toFixed(2) %></h3></div><% }) %>
+</div></body></html>

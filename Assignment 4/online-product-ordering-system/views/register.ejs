@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html><head><title>Register</title><link rel="stylesheet" href="/style.css"></head>
+<body><div class="container"><div class="card">
+<h1>Create Account</h1>
+<% errors.forEach(e => { %><div class="error"><%= e.msg %></div><% }) %>
+<form action="/register" method="POST">
+<label>Name</label><input name="name" value="<%= oldData.name || '' %>" required>
+<label>Email</label><input type="email" name="email" value="<%= oldData.email || '' %>" required>
+<label>Mobile</label><input name="mobile" value="<%= oldData.mobile || '' %>" required>
+<label>Address</label><textarea name="address" required><%= oldData.address || '' %></textarea>
+<label>Password</label><input type="password" name="password" minlength="6" required>
+<button>Register</button>
+</form><p>Already registered? <a href="/login">Login</a></p>
+</div></div></body></html>

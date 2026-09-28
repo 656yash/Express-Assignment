@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html><head><title>Products</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<nav><b>Online Product Store</b><span>Hi, <%= user.name %> | <a href="/cart">Cart</a> | <a href="/orders">Orders</a><% if(user.role==="admin"){ %> | <a href="/orders/admin">Manage Orders</a><% } %> | <a href="/logout">Logout</a></span></nav>
+<div class="dashboard"><div class="header"><div><h1>Products</h1><p>Browse and order products</p></div><% if(user.role==="admin"){ %><a class="btn" href="/products/add">+ Add Product</a><% } %></div>
+<div class="grid">
+<% products.forEach(p => { %>
+<div class="product">
+<% if(p.image){ %><img src="<%= p.image %>" alt="<%= p.name %>"><% } %>
+<h2><%= p.name %></h2><p><%= p.description %></p><small><%= p.category %></small><h3>₹<%= p.price.toFixed(2) %></h3><p>Stock: <%= p.quantity %></p>
+<% if(user.role==="customer"){ %>
+<form action="/cart/add" method="POST"><input type="hidden" name="productId" value="<%= p._id %>"><input class="qty" type="number" name="quantity" min="1" max="<%= Math.min(p.quantity,100) %>" value="1" <%= p.quantity===0 ? "disabled" : "" %>><button <%= p.quantity===0 ? "disabled" : "" %>>Add to Cart</button></form>
+<% } else { %><a class="btn" href="/products/edit/<%= p._id %>">Edit</a><form class="inline" action="/products/delete/<%= p._id %>" method="POST"><button class="danger" onclick="return confirm('Delete product?')">Delete</button></form><% } %>
+</div>
+<% }) %>
+</div></div></body></html>
